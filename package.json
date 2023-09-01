@@ -1,0 +1,19 @@
+{
+  "name": "stailwind",
+  "version": "0.0.1",
+  "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonatasge/stailwind.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonatasge/stailwind/issues"
+  },
+  "homepage": "https://github.com/jonatasge/stailwind#readme"
+}
