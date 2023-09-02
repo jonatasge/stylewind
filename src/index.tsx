@@ -41,4 +41,6 @@ export function stailwind<T extends Target>(target: T) {
   return styled;
 }
 
-export default stailwind;
+export const stw = stailwind;
+
+export default stw;
