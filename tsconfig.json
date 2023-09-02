@@ -14,5 +14,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
   },
-  "exclude": ["site"]
+  "exclude": ["./node_modules", "./dist", "./site"]
 }
