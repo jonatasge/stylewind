@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w --declaration",
-    "build": "tsc --declaration"
+    "build": "tsc --declaration",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
