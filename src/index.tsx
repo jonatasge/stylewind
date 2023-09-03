@@ -11,11 +11,11 @@ import {
 
 export function stailwind<T extends Target>(target: T) {
   const name = typeof target === "function" ? target.name : (target as string);
-  let styles: StwStyledStyles;
+  let styles: string;
   let callbacks: StwStyledCallbacks<T>;
 
   function styled<P>(str: StwStyledStyles, ...cbs: StwStyledCallbacks<T, P>) {
-    styles = str;
+    styles = str.join("");
     callbacks = cbs;
     return build<P>;
   }
@@ -28,13 +28,10 @@ export function stailwind<T extends Target>(target: T) {
   }
 
   function handle<P>(props: Props<T, P>, handle: StwBuildHandleProps<T, P>) {
-    const className = callbacks.reduce(
-      (r, cb) => `${r} ${(cb instanceof Array ? cb[0] : cb)?.(props)}`,
-      ""
-    );
+    const className = callbacks.reduce((r, cb) => `${r} ${cb?.(props)}`, "");
     return {
       ...handle(props),
-      className: twMerge(styles[0], props.className || "", className),
+      className: twMerge(styles, props.className || "", className),
     } as Props<T>;
   }
 
