@@ -22,14 +22,16 @@ npm i stailwind
 ```json
 {
   "tailwindCSS.experimental.classRegex": [
-    "(?:stw|stailwind)(?:|<[^>]*>)(?:|\\([^)]*\\))(?:|<[^>]*>)`((?:\\$\\{[^}]*\\}|[^$`])*?)`"
+    "(?:stw|stailwind)(?:|<[^>]*>)(?:|\\([^)]*\\))(?:|<[^>]*>)`((?:\\$\\{[^}]*\\}|[^$`])*?)`",
+    "css(?:|\\()[`'\"]([^`'\"]+)[`'\"](?:|\\))"
   ]
 }
 ```
 
-## How to use
+## How to use stailwind / stw function
 
 Creation:
+
 ```tsx
 import stw from "stailwind";
 // or
@@ -65,11 +67,13 @@ Usage:
 
 Result:
 
-![Alt text](./site/assets/example1.png)
+![Example 1](./site/assets/example1.png)
 
 ### Custom props
 
 Stailwind supports custom properties in your component. Also you can filter custom properties to prevent them from being rendered in the DOM, avoiding console errors.
+
+Creation:
 
 ```tsx
 const Btn = stw("button")<{
@@ -94,7 +98,72 @@ Usage:
 
 Result:
 
-![Alt text](./site/assets/example2.png)
+![Example 2](./site/assets/example2.png)
+
+## How to use css function
+
+Creation:
+
+```tsx
+import stw, { css } from "stailwind";
+
+const commonStyles = css`
+  px-6
+  py-2.5
+  rounded-3xl
+  text-white
+`;
+// or
+// css('...')
+// css("...")
+// css(`...`)
+
+const MaterialBtn = stw('button')<{
+  variation: 'elevated' | 'outlined' | 'icon';
+}>`
+  font-medium
+  h-10
+  text-sm
+  
+  ${({ variation }) =>
+    ({
+      elevated: css`
+        ${commonStyles}
+        bg-blue-500
+        shadow
+        shadow-gray-500
+      `,
+      outlined: css`
+        ${commonStyles}
+        bg-red-500
+        border
+        border-black
+      `,
+      icon: css`
+        bg-green-500
+        p-2
+        rounded-full
+        w-10
+      `
+    }[variation])}
+`(({ variation, ...props }) => props);
+```
+
+
+Usage:
+
+```tsx
+<>
+  <MaterialBtn variation="elevated">Elevated</MaterialBtn>
+  <MaterialBtn variation="outlined">Outlined</MaterialBtn>
+  <MaterialBtn variation="icon">X</MaterialBtn>
+</>
+```
+
+Result:
+
+![Example 3](./site/assets/example3.png)
 
 ## License
+
 This project is licensed under the terms of the [MIT license](https://github.com/jonatasge/stailwind/blob/main/LICENSE).
