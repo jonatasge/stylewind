@@ -1,9 +1,10 @@
 {
   "name": "stailwind",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": ["dist/*"],
   "scripts": {
     "dev": "tsc -w --declaration",
     "build": "tsc --declaration",
