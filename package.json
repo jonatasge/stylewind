@@ -1,10 +1,12 @@
 {
   "name": "stailwind",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "dev": "tsc -w --declaration",
     "build": "tsc --declaration",
@@ -20,11 +22,12 @@
     "url": "https://github.com/jonatasge/stailwind/issues"
   },
   "homepage": "https://github.com/jonatasge/stailwind#readme",
-  "dependencies": {},
+  "dependencies": {
+    "tailwind-merge": "^2.2.1"
+  },
   "devDependencies": {
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
-    "tailwind-merge": "^2.2.1",
     "typescript": "^5.3.3"
   }
 }
