@@ -1,4 +1,4 @@
-# Stailwind
+# @stylewind
 
 Create components with [tailwindcss](https://github.com/tailwindlabs/tailwindcss) easily and quickly :)
 
@@ -6,12 +6,12 @@ Inspired by [styled-components](https://github.com/styled-components/styled-comp
 
 ## Installation
 
-Stailwind is available as an [npm package](https://www.npmjs.com/package/stailwind).
+@stylewind is available as an [npm package](https://www.npmjs.com/package/@stylewind).
 
 npm:
 
 ```bash
-npm i stailwind
+npm i @stylewind
 ```
 
 ## Settings
@@ -22,20 +22,20 @@ npm i stailwind
 ```json
 {
   "tailwindCSS.experimental.classRegex": [
-    "(?:stw|stailwind)(?:|<[^>]*>)(?:|\\([^)]*\\))(?:|<[^>]*>)`((?:\\$\\{[^}]*\\}|[^$`])*?)`",
+    "(?:stw|stylewind)(?:|<[^>]*>)(?:|\\([^)]*\\))(?:|<[^>]*>)`((?:\\$\\{[^}]*\\}|[^$`])*?)`",
     "css(?:|\\()[`'\"]([^`'\"]+)[`'\"](?:|\\))"
   ]
 }
 ```
 
-## How to use stailwind / stw function
+## How to use @stylewind / stw function
 
 Creation:
 
 ```tsx
-import stw from "stailwind";
+import stw from "@stylewind";
 // or
-// import { stailwind } from "stailwind";
+// import { stylewind } from "@stylewind";
 
 const Button = stw("button")`
   border
@@ -71,7 +71,7 @@ Result:
 
 ### Custom props
 
-Stailwind supports custom properties in your component. Also you can filter custom properties to prevent them from being rendered in the DOM, avoiding console errors.
+@stylewind supports custom properties in your component. Also you can filter custom properties to prevent them from being rendered in the DOM, avoiding console errors.
 
 Creation:
 
@@ -105,7 +105,7 @@ Result:
 Creation:
 
 ```tsx
-import stw, { css } from "stailwind";
+import stw, { css } from "@stylewind";
 
 const commonStyles = css`
   px-6
@@ -166,4 +166,4 @@ Result:
 
 ## License
 
-This project is licensed under the terms of the [MIT license](https://github.com/jonatasge/stailwind/blob/main/LICENSE).
+This project is licensed under the terms of the [MIT license](https://github.com/jonatasge/stylewind/blob/main/LICENSE).
