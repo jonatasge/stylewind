@@ -1,5 +1,5 @@
 {
-  "name": "@stylewind",
+  "name": "@stylewind/core",
   "version": "0.0.1",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsc -w --declaration",
     "build": "tsc --declaration",
-    "publ": "npm publish"
+    "publ": "npm publish --access public"
   },
   "repository": {
     "type": "git",

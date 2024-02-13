@@ -6,12 +6,12 @@ Inspired by [styled-components](https://github.com/styled-components/styled-comp
 
 ## Installation
 
-@stylewind is available as an [npm package](https://www.npmjs.com/package/@stylewind).
+@stylewind is available as an [npm package](https://www.npmjs.com/package/@stylewind/core).
 
 npm:
 
 ```bash
-npm i @stylewind
+npm i @stylewind/core
 ```
 
 ## Settings
@@ -28,14 +28,14 @@ npm i @stylewind
 }
 ```
 
-## How to use @stylewind / stw function
+## How to use stylewind / stw function
 
 Creation:
 
 ```tsx
-import stw from "@stylewind";
+import stw from "@stylewind/core";
 // or
-// import { stylewind } from "@stylewind";
+// import { stylewind } from "@stylewind/core";
 
 const Button = stw("button")`
   border
@@ -105,7 +105,7 @@ Result:
 Creation:
 
 ```tsx
-import stw, { css } from "@stylewind";
+import stw, { css } from "@stylewind/core";
 
 const commonStyles = css`
   px-6
