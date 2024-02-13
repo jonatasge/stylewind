@@ -3,13 +3,13 @@ import { twMerge } from "tailwind-merge";
 
 import {
   Props,
-  Target,
   StwBuildHandleProps,
   StwStyledCallbacks,
   StwStyledStyles,
+  Target,
 } from "./types";
 
-export function stylewind<T extends Target>(target: T) {
+export default function stylewind<T extends Target>(target: T) {
   const name = typeof target === "function" ? target.name : (target as string);
   let styles: string;
   let callbacks: StwStyledCallbacks<T>;
@@ -39,20 +39,3 @@ export function stylewind<T extends Target>(target: T) {
 }
 
 export const stw = stylewind;
-
-export default stw;
-
-export const css = (
-  ...values: (string | number | TemplateStringsArray | CallableFunction)[]
-) => {
-  return values.reduce((r, val) => {
-    const type = typeof val;
-
-    if (val instanceof Array && typeof val[0] === "string")
-      return val.join(" ");
-    if (type === "function") return `${r} ${(val as CallableFunction)()}`;
-    if (["number", "string"].includes(type)) return `${r} ${val}`;
-
-    return r;
-  }, "") as string;
-};
