@@ -31,7 +31,7 @@ export default function stylewind<T extends Target>(target: T) {
     const className = callbacks.reduce((r, cb) => `${r} ${cb?.(props)}`, "");
     return {
       ...handle(props),
-      className: twMerge(styles, props.className || "", className),
+      className: twMerge(styles, className, props.className || ""),
     } as Props<T>;
   }
 
