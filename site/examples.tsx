@@ -1,4 +1,4 @@
-import stw, { css } from "stailwind";
+import stw, { css } from "@stylewind";
 
 const Flex = stw("div")`
   flex

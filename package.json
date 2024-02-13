@@ -1,6 +1,6 @@
 {
-  "name": "stailwind",
-  "version": "0.0.5",
+  "name": "@stylewind",
+  "version": "0.0.1",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jonatasge/stailwind.git"
+    "url": "git+https://github.com/jonatasge/stylewind.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jonatasge/stailwind/issues"
+    "url": "https://github.com/jonatasge/stylewind/issues"
   },
-  "homepage": "https://github.com/jonatasge/stailwind#readme",
+  "homepage": "https://github.com/jonatasge/stylewind#readme",
   "dependencies": {
     "tailwind-merge": "^2.2.1"
   },

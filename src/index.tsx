@@ -9,7 +9,7 @@ import {
   StwStyledStyles,
 } from "./types";
 
-export function stailwind<T extends Target>(target: T) {
+export function stylewind<T extends Target>(target: T) {
   const name = typeof target === "function" ? target.name : (target as string);
   let styles: string;
   let callbacks: StwStyledCallbacks<T>;
@@ -38,7 +38,7 @@ export function stailwind<T extends Target>(target: T) {
   return styled;
 }
 
-export const stw = stailwind;
+export const stw = stylewind;
 
 export default stw;
 
