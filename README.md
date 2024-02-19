@@ -33,7 +33,7 @@ npm i @stylewind/core
 Creation:
 
 ```tsx
-import stw from "@stylewind/core";
+import { stw } from "@stylewind/core";
 // or
 // import { stylewind } from "@stylewind/core";
 
@@ -105,7 +105,7 @@ Result:
 Creation:
 
 ```tsx
-import stw, { css } from "@stylewind/core";
+import { stw, css } from "@stylewind/core";
 
 const commonStyles = css`
   px-6
