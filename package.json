@@ -1,6 +1,6 @@
 {
   "name": "@stylewind/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,11 +24,12 @@
   },
   "homepage": "https://github.com/jonatasge/stylewind#readme",
   "dependencies": {
+    "react": ">=16.9.0",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
-    "@types/react": "^18.2.55",
+    "@types/react": ">=16.9.56",
     "typescript": "^5.3.3"
   }
 }
