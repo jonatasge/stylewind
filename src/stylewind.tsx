@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 import {
@@ -9,7 +9,7 @@ import {
   Target,
 } from "./types";
 
-export default function stylewind<T extends Target>(target: T) {
+export function stylewind<T extends Target>(target: T) {
   const name = typeof target === "function" ? target.name : (target as string);
   let styles: string;
   let callbacks: StwStyledCallbacks<T>;
@@ -21,16 +21,24 @@ export default function stylewind<T extends Target>(target: T) {
   }
 
   function build<P>(handleProps: StwBuildHandleProps<T, P> = (p) => p) {
-    const T = target;
+    const Target = target;
     return {
-      [name]: (props: Props<T, P>) => <T {...handle<P>(props, handleProps)} />,
+      [name]: forwardRef<any, Props<T, P>>((props, ref) => (
+        <Target {...handle<P>(props, ref, handleProps)} />
+      )),
     }[name];
   }
 
-  function handle<P>(props: Props<T, P>, handle: StwBuildHandleProps<T, P>) {
+  function handle<P>(
+    props: Props<T, P>,
+    ref: ForwardedRef<any>,
+    handle: StwBuildHandleProps<T, P>
+  ) {
     const className = callbacks.reduce((r, cb) => `${r} ${cb?.(props)}`, "");
+    
     return {
       ...handle(props),
+      ref,
       className: twMerge(styles, className, props.className || ""),
     } as Props<T>;
   }
