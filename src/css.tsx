@@ -1,9 +1,9 @@
-export function css(
-  ...values: (string | number | TemplateStringsArray | CallableFunction)[]
-) {
-  if (values[0] instanceof Array && typeof values[0][0] === "string") {
-    return values[0].reduce(
-      (r, val, i) => `${r}${val}${handleTemplate(values[i + 1])}`,
+import { StwStyles } from "./types";
+
+export function css<T = unknown, P = unknown>(...styles: StwStyles<T, P>) {
+  if (styles[0] instanceof Array && typeof styles[0][0] === "string") {
+    return styles[0].reduce(
+      (r, val, i) => `${r}${val}${handleTemplate(styles[i + 1])}`,
       ""
     );
   }
