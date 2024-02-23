@@ -1,46 +1,35 @@
 import React, { ForwardedRef, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-import {
-  Props,
-  StwBuildHandleProps,
-  StwStyledCallbacks,
-  StwStyledStyles,
-  Target,
-} from "./types";
+import { css } from "./css";
+import { Props, StwBuildHandleProps, StwStyles, Target } from "./types";
 
 export function stylewind<T extends Target>(target: T) {
-  const name = typeof target === "function" ? target.name : (target as string);
-  let styles: string;
-  let callbacks: StwStyledCallbacks<T>;
+  let styles: StwStyles<T>;
 
-  function styled<P>(str: StwStyledStyles, ...cbs: StwStyledCallbacks<T, P>) {
-    styles = str.join("");
-    callbacks = cbs;
+  function styled<P>(...style: StwStyles<T, P>) {
+    styles = style;
     return build<P>;
   }
 
   function build<P>(handleProps: StwBuildHandleProps<T, P> = (p) => p) {
     const Target = target;
-    return {
-      [name]: forwardRef<any, Props<T, P>>((props, ref) => (
-        <Target {...handle<P>(props, ref, handleProps)} />
-      )),
-    }[name];
+    return forwardRef<T, Props<T, P>>((props, ref) => (
+      <Target {...handle<P>(props, ref, handleProps)} />
+    )) as (props: Props<T, P>) => JSX.Element;
   }
 
   function handle<P>(
     props: Props<T, P>,
-    ref: ForwardedRef<any>,
+    ref: ForwardedRef<T>,
     handle: StwBuildHandleProps<T, P>
   ) {
-    const className = callbacks.reduce((r, cb) => `${r} ${cb?.(props)}`, "");
-    
-    return {
-      ...handle(props),
-      ref,
-      className: twMerge(styles, className, props.className || ""),
-    } as Props<T>;
+    const handledStyles = css(
+      ...styles.map((e) => (typeof e === "function" ? () => e(props) : e))
+    );
+    const handledProps = handle(props);
+    const className = twMerge(handledStyles, handledProps.className);
+    return { ref, ...handledProps, className } as Props<T>;
   }
 
   return styled;

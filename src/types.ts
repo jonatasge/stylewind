@@ -21,12 +21,13 @@ export type Props<T, U = unknown> = (T extends KnownTarget
   : {}) &
   U;
 
-export type StwStyledStyles = TemplateStringsArray;
-
-export type StwStyledCallbacks<T, P = unknown> = ((
-  props: Props<T, P>
-) => string)[];
-
+  export type StwStyles<T, P = unknown> = (
+    | string
+    | number
+    | TemplateStringsArray
+    | ((props: Props<T, P>) => string)
+  )[];
+  
 export type StwBuildHandleProps<T, P> = (
   props: Props<T, P>
 ) => Partial<Props<T, P>>;
