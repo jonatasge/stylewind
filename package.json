@@ -1,6 +1,6 @@
 {
   "name": "@stylewind/core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

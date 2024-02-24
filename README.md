@@ -107,7 +107,7 @@ Creation:
 ```tsx
 import { stw, css } from "@stylewind/core";
 
-const commonStyles = css`
+const common = css`
   px-6
   py-2.5
   rounded-3xl
@@ -128,13 +128,13 @@ const MaterialBtn = stw('button')<{
   ${({ variation }) =>
     ({
       elevated: css`
-        ${commonStyles}
+        ${common}
         bg-blue-500
         shadow
         shadow-gray-500
       `,
       outlined: css`
-        ${commonStyles}
+        ${common}
         bg-red-500
         border
         border-black
@@ -163,6 +163,23 @@ Usage:
 Result:
 
 ![Example 3](./site/assets/example3.png)
+
+## Property "as"
+
+With the "as" property it is possible to customize the tag that will be rendered in the DOM. No configuration required.
+
+Usage:
+
+```tsx
+<>
+  <Text as="h1">Heading 1</Text>
+  <Text as="p">Paragraph</Text>
+</>
+```
+
+Result:
+
+![Example 4](./site/assets/example4.png)
 
 ## License
 
