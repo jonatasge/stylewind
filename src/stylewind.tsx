@@ -13,10 +13,10 @@ export function stylewind<T extends Target>(target: T) {
   }
 
   function build<P>(handleProps: StwBuildHandleProps<T, P> = (p) => p) {
-    const Target = target;
-    return forwardRef<T, Props<T, P>>((props, ref) => (
-      <Target {...handle<P>(props, ref, handleProps)} />
-    )) as (props: Props<T, P>) => JSX.Element;
+    return forwardRef<T, Props<T, P>>((props, ref) => {
+      const Target = props.as || target;
+      return <Target {...handle<P>(props, ref, handleProps)} />;
+    }) as (props: Props<T, P>) => JSX.Element;
   }
 
   function handle<P>(
@@ -28,8 +28,14 @@ export function stylewind<T extends Target>(target: T) {
       ...styles.map((e) => (typeof e === "function" ? () => e(props) : e))
     );
     const handledProps = handle(props);
-    const className = twMerge(handledStyles, handledProps.className);
-    return { ref, ...handledProps, className } as Props<T>;
+    const className =
+      twMerge(handledStyles, handledProps.className) || undefined;
+    return {
+      ref,
+      ...handledProps,
+      className,
+      as: undefined,
+    };
   }
 
   return styled;
