@@ -22,7 +22,7 @@ npm i @stylewind/core
 ```json
 {
   "tailwindCSS.experimental.classRegex": [
-    "(?:stw|stylewind)(?:[\\(<].*?[\\)>])?(?:`|e \\${)((?:.|\\n)*?)(?:`|\\${)",
+    "(?:stw|stylewind)(?:\\.[\\w.]+)?(?:[\\(<][\\s\\S]*?[\\)>])?(?:`|e \\${)([\\s\\S]*?)(?:`|\\${)",
     "css`([^`]*)`"
   ]
 }
@@ -37,22 +37,22 @@ import { stw } from "@stylewind/core";
 // or
 // import { stylewind } from "@stylewind/core";
 
-const Button = stw("button")`
+const Button = stw.button`
   border
   border-gray-400
   px-4
   py-2
   rounded-md
-`();
+`;
 
 const ButtonBlue = stw(Button)`
   bg-blue-500
   text-white
-`();
+`;
 
 const ButtonRed = stw(ButtonBlue)`
   bg-red-500
-`();
+`;
 ```
 
 Usage:
@@ -71,34 +71,51 @@ Result:
 
 ### Custom props
 
-@stylewind supports custom properties in your component. Also you can filter custom properties to prevent them from being rendered in the DOM, avoiding console errors.
+@stylewind supports custom properties in your component.
+
+By default, invalid properties are filtered out from being rendered in the DOM, avoiding console errors.
+
+But if you need a property to be rendered in the DOM, or prevent it from being rendered, use `.withConfig({ shouldProps: [...] })`.
 
 Creation:
 
 ```tsx
-const Btn = stw("button")<{
+const Btn = stw.button.withConfig<{
   color?: "primary" | "secondary";
-}>`
+  testid?: string;
+}>({
+  shouldProps: {
+    forward: ['testid'],
+    notForward: ['color'],
+  }
+})`
   px-4
   py-2
   rounded-md
   text-white
+  
   ${({ color }) => (color === "secondary" ? "bg-red-500" : "bg-blue-500")}
-`(({ color, ...props }) => props); // filtering custom props
+`;
 ```
 
 Usage:
 
 ```tsx
 <>
-  <Btn>Primary</Btn>
-  <Btn color="secondary">Secondary</Btn>
+  <Btn testid="btnPrimary">Primary</Btn>
+  <Btn testid="btnSecondary" color="secondary">
+    Secondary
+  </Btn>
 </>
 ```
 
 Result:
 
 ![Example 2](./site/assets/example2.png)
+
+DOM:
+
+![Example 2](./site/assets/example2-DOM.png)
 
 ## How to use css function
 
@@ -113,10 +130,6 @@ const common = css`
   rounded-3xl
   text-white
 `;
-// or
-// css('...')
-// css("...")
-// css(`...`)
 
 const MaterialBtn = stw('button')<{
   variation: 'elevated' | 'outlined' | 'icon';
@@ -146,7 +159,7 @@ const MaterialBtn = stw('button')<{
         w-10
       `
     }[variation])}
-`(({ variation, ...props }) => props);
+`;
 ```
 
 
@@ -167,6 +180,14 @@ Result:
 ## Property "as"
 
 With the "as" property it is possible to customize the tag that will be rendered in the DOM. No configuration required.
+
+Creation:
+
+```tsx
+const Text = stw.span`
+  ...
+`;
+```
 
 Usage:
 

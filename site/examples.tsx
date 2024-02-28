@@ -1,40 +1,47 @@
 import { stw, css } from "@stylewind/core";
 
-const Flex = stw("div")`
+const Flex = stw.div`
   flex
   flex-wrap
   gap-x-2
   gap-y-8
   items-start
   w-full
-`();
+`;
 
-const Button = stw("button")`
+const Button = stw.button`
   border
   border-gray-400
   px-4
   py-2
   rounded-md
-`();
+`;
 
 const ButtonBlue = stw(Button)`
   bg-blue-500
   text-white
-`();
+`;
 
 const ButtonRed = stw(ButtonBlue)`
   bg-red-500
-`();
+`;
 
-const Btn = stw("button")<{
+const Btn = stw.button.withConfig<{
   color?: "primary" | "secondary";
-}>`
-  ${({ color }) => (color === "secondary" ? "bg-red-500" : "bg-blue-500")}
+  testid?: string;
+}>({
+  shouldProps: {
+    forward: ["testid"],
+    notForward: ["color"],
+  },
+})`
   px-4
   py-2
   rounded-md
   text-white
-`(({ color, ...props }) => props);
+  
+  ${({ color }) => (color === "secondary" ? "bg-red-500" : "bg-blue-500")}
+`;
 
 const commonStyles = css`
   px-6
@@ -71,7 +78,7 @@ const MaterialBtn = stw("button")<{
         w-10
       `,
     }[variation])}
-`(({ variation, ...props }) => props);
+`;
 
 export default function Page() {
   return (
@@ -83,8 +90,8 @@ export default function Page() {
       </Flex>
 
       <Flex>
-        <Btn>Primary</Btn>
-        <Btn color="secondary">Secondary</Btn>
+        <Btn testid="btnPrimary">Primary</Btn>
+        <Btn testid="btnSecondary" color="secondary">Secondary</Btn>
       </Flex>
 
       <Flex>
