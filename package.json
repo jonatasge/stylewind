@@ -1,6 +1,6 @@
 {
   "name": "@stylewind/core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Create components with tailwindcss easily and quickly (inspired by styled-components)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,8 +8,9 @@
     "dist/*"
   ],
   "scripts": {
-    "dev": "tsc -w --declaration",
-    "build": "tsc --declaration",
+    "clean": "rm -rf ./dist",
+    "dev": "npm run clean && tsc -w --declaration",
+    "build": "npm run clean && tsc --declaration",
     "publ": "npm run build && npm publish --access public",
     "pre:publ": "npm publish --dry-run"
   },
